@@ -2,7 +2,7 @@
 const PREMIUM_KEY = 'visibility_insights_premium';
 const SCAN_COUNT_KEY = 'visibility_insights_scan_count';
 const MAX_FREE_SCANS = 3;
-const PAYMENT_SITE_URL = 'https://visibility-insights.com/payment';
+const PAYMENT_SITE_URL = 'https://visibility-insights.onrender.com/payment';
 
 // Check if user has premium access
 async function hasPremiumAccess() {

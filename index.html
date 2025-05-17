@@ -10,8 +10,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Stripe JS -->
-  <script src="https://js.stripe.com/v3/"></script>
+  <!-- PayPal JS SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
   <style>
     :root {
       --primary-color: #4166f5;
@@ -132,14 +132,16 @@
       border-bottom-color: var(--primary-color);
     }
     
-    #card-element {
-      border: 1px solid var(--border-color);
-      padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 20px;
+    #card-payment {
+      margin-bottom: 30px;
     }
     
-    #payment-button {
+    #paypal-button-container {
+      width: 100%;
+      min-height: 150px;
+    }
+    
+    .payment-button {
       background-color: var(--primary-color);
       color: white;
       border: none;
@@ -156,11 +158,11 @@
       gap: 8px;
     }
     
-    #payment-button:hover {
+    .payment-button:hover {
       background-color: #3451c6;
     }
     
-    #payment-button:disabled {
+    .payment-button:disabled {
       background-color: #93c5fd;
       cursor: not-allowed;
     }
@@ -194,6 +196,39 @@
       to {
         transform: rotate(360deg);
       }
+    }
+
+    /* Card form element styles */
+    .card-form {
+      border: 1px solid #d1d5db;
+      padding: 16px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    
+    .card-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .card-row > div {
+      flex: 1;
+    }
+    
+    .card-row label {
+      display: block;
+      margin-bottom: 6px;
+      color: #4b5563;
+      font-size: 14px;
+    }
+    
+    .card-row input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -241,39 +276,46 @@
       
       <div class="payment-methods">
         <div class="payment-method-tabs">
-          <div class="payment-tab active">Credit Card</div>
-          <div class="payment-tab">PayPal</div>
+          <div class="payment-tab active" id="tab-credit">Credit Card</div>
+          <div class="payment-tab" id="tab-paypal">PayPal</div>
         </div>
         
         <!-- Credit Card Form -->
         <div id="card-payment" class="payment-form">
-          <div id="card-element">
-            <!-- Stripe Card Element will be inserted here -->
+          <div class="card-form">
+            <div class="card-row">
+              <div>
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+              </div>
+            </div>
+            <div class="card-row">
+              <div>
+                <label for="card-expiry">Expiry Date</label>
+                <input type="text" id="card-expiry" placeholder="MM/YY">
+              </div>
+              <div>
+                <label for="card-cvc">CVC</label>
+                <input type="text" id="card-cvc" placeholder="123">
+              </div>
+            </div>
           </div>
-          <button id="payment-button">
-            <span id="button-text">Pay $50 USD</span>
-            <div id="spinner" class="spinner" style="display: none;"></div>
+          <button id="credit-card-button" class="payment-button">
+            <span>Pay $50 USD</span>
           </button>
-          <div id="payment-message" class="error-message"></div>
         </div>
         
         <!-- PayPal Option (Hidden initially) -->
         <div id="paypal-payment" class="payment-form" style="display: none;">
-          <div style="text-align: center; padding: 20px; background-color: #f8fafc; border-radius: 8px;">
-            <button id="paypal-button" style="background-color: #0070ba; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: 500; cursor: pointer;">
-              <i class="bi bi-paypal" style="margin-right: 8px;"></i>
-              Pay with PayPal
-            </button>
-          </div>
-          <div style="margin-top: 20px; text-align: center; color: #6b7280; font-size: 14px;">
-            You'll be redirected to PayPal to complete your payment.
-          </div>
+          <div id="paypal-button-container"></div>
         </div>
       </div>
+      
+      <div id="payment-message" class="error-message"></div>
     </div>
     
     <div class="footer">
-      <div>Secure payment processing through Stripe</div>
+      <div>Secure payment processing</div>
       <div style="margin-top: 8px;">Visibility Insights © 2025 | Privacy Policy | Terms of Service</div>
     </div>
   </div>
@@ -289,32 +331,124 @@
       localStorage.setItem('vi_session_id', sessionId);
       localStorage.setItem('vi_return_url', returnUrl);
       
-      // For demonstration, we'll simulate a payment process
-      // In a real implementation, you'd integrate with Stripe or PayPal here
-      
       // Set up payment tabs
-      const tabs = document.querySelectorAll('.payment-tab');
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-          // Remove active class from all tabs
-          tabs.forEach(t => t.classList.remove('active'));
-          
-          // Add active class to clicked tab
-          this.classList.add('active');
-          
-          // Show corresponding payment form
-          if (this.textContent.includes('Credit Card')) {
-            document.getElementById('card-payment').style.display = 'block';
-            document.getElementById('paypal-payment').style.display = 'none';
-          } else if (this.textContent.includes('PayPal')) {
-            document.getElementById('card-payment').style.display = 'none';
-            document.getElementById('paypal-payment').style.display = 'block';
-          }
-        });
+      const tabCredit = document.getElementById('tab-credit');
+      const tabPaypal = document.getElementById('tab-paypal');
+      const cardPayment = document.getElementById('card-payment');
+      const paypalPayment = document.getElementById('paypal-payment');
+      
+      tabCredit.addEventListener('click', function() {
+        tabCredit.classList.add('active');
+        tabPaypal.classList.remove('active');
+        cardPayment.style.display = 'block';
+        paypalPayment.style.display = 'none';
       });
       
-      // Handle credit card payment
-      const paymentButton = document.getElementById('payment-button');
-      if (paymentButton) {
-        paymentButton.addEventListener('click', function() {
-          // Show
+      tabPaypal.addEventListener('click', function() {
+        tabPaypal.classList.add('active');
+        tabCredit.classList.remove('active');
+        paypalPayment.style.display = 'block';
+        cardPayment.style.display = 'none';
+      });
+      
+      // Initialize PayPal buttons
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          // Create a PayPal order
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: '50.00' // $50 USD
+              },
+              description: 'Visibility Insights Premium'
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          // Capture funds from the transaction
+          return actions.order.capture().then(function(details) {
+            // Record successful payment on our server
+            fetch('/api/record-payment', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                sessionId: sessionId,
+                paymentMethod: 'paypal',
+                orderId: data.orderID,
+                amount: 50,
+                email: details.payer.email_address
+              })
+            })
+            .then(response => response.json())
+            .then(result => {
+              // Redirect back to extension
+              if (returnUrl) {
+                window.location.href = `${returnUrl}?payment_status=completed&session=${sessionId}`;
+              } else {
+                alert('Payment successful! You can now close this window and return to the extension.');
+              }
+            })
+            .catch(error => {
+              document.getElementById('payment-message').textContent = 'Error processing payment. Please try again.';
+            });
+          });
+        }
+      }).render('#paypal-button-container');
+      
+      // Handle credit card payment (simplified for demo)
+      document.getElementById('credit-card-button').addEventListener('click', function() {
+        const cardNumber = document.getElementById('card-number').value;
+        const cardExpiry = document.getElementById('card-expiry').value;
+        const cardCvc = document.getElementById('card-cvc').value;
+        
+        // Basic validation
+        if (!cardNumber || !cardExpiry || !cardCvc) {
+          document.getElementById('payment-message').textContent = 'Please fill in all card details';
+          return;
+        }
+        
+        // Show processing state
+        this.disabled = true;
+        const originalText = this.innerHTML;
+        this.innerHTML = '<div class="spinner"></div> Processing...';
+        
+        // For demonstration, we'll simulate a successful payment after a delay
+        setTimeout(() => {
+          // Record successful payment on our server
+          fetch('/api/record-payment', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              sessionId: sessionId,
+              paymentMethod: 'credit_card',
+              amount: 50
+            })
+          })
+          .then(response => response.json())
+          .then(result => {
+            // Redirect back to extension
+            if (returnUrl) {
+              window.location.href = `${returnUrl}?payment_status=completed&session=${sessionId}`;
+            } else {
+              alert('Payment successful! You can now close this window and return to the extension.');
+            }
+          })
+          .catch(error => {
+            // For demonstration, we'll still redirect with success
+            // In production, you would show an error message
+            if (returnUrl) {
+              window.location.href = `${returnUrl}?payment_status=completed&session=${sessionId}`;
+            } else {
+              alert('Payment successful! You can now close this window and return to the extension.');
+            }
+          });
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>

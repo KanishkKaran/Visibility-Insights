@@ -24,7 +24,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const sessionId = message.sessionId;
     
     // Call the server to verify this payment
-    fetch(`https://visibility-insights.com/api/verify-payment?sessionId=${sessionId}`)
+    fetch(`https://visibility-insights.onrender.com/api/verify-payment?sessionId=${sessionId}`)
       .then(response => response.json())
       .then(data => {
         if (data.premium) {
@@ -80,6 +80,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ success: true, data: result.scanResults || {} });
     });
     return true; // Required for async sendResponse
+  }
+
+  // Open popup
+  if (message.action === 'openPopup') {
+    chrome.action.openPopup();
+    sendResponse({ success: true });
+    return true;
   }
 });
 
