@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visibility Insights | Premium Upgrade</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Stripe JS -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    :root {
+      --primary-color: #4166f5;
+      --secondary-color: #1a202c;
+      --light-bg: #f8fafc;
+      --border-color: #e2e8f0;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--light-bg);
+      color: #334155;
+      min-height: 100vh;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .container {
+      max-width: 800px;
+      width: 100%;
+      padding: 20px;
+    }
+    
+    .payment-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.03);
+      padding: 40px;
+      margin-bottom: 30px;
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo-icon {
+      color: var(--primary-color);
+      font-size: 28px;
+      margin-right: 12px;
+    }
+    
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin: 0 0 20px 0;
+    }
+    
+    .plan-details {
+      background-color: var(--light-bg);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .plan-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .plan-icon {
+      color: #fbbf24;
+      margin-right: 8px;
+    }
+    
+    .plan-price {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+    
+    .plan-features {
+      margin: 20px 0;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      color: #4b5563;
+    }
+    
+    .feature-icon {
+      color: #059669;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    
+    .payment-methods {
+      margin-bottom: 20px;
+    }
+    
+    .payment-method-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .payment-tab {
+      padding: 12px 20px;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+    }
+    
+    .payment-tab.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+    
+    #card-element {
+      border: 1px solid var(--border-color);
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    
+    #payment-button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 16px;
+      width: 100%;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    #payment-button:hover {
+      background-color: #3451c6;
+    }
+    
+    #payment-button:disabled {
+      background-color: #93c5fd;
+      cursor: not-allowed;
+    }
+    
+    .error-message {
+      color: #dc2626;
+      margin-top: 10px;
+      text-align: center;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 14px;
+    }
+    
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="payment-card">
+      <div class="header">
+        <i class="bi bi-bar-chart-fill logo-icon"></i>
+        <h1>Visibility Insights Premium</h1>
+      </div>
+      
+      <p class="lead">Unlock unlimited website scans and advanced SEO insights.</p>
+      
+      <div class="plan-details">
+        <div class="plan-name">
+          <i class="bi bi-star-fill plan-icon"></i>
+          Premium Plan
+        </div>
+        <div class="plan-price">$50 <span class="text-muted" style="font-size: 16px;">USD (one-time payment)</span></div>
+        <p>Lifetime access to all premium features</p>
+      </div>
+      
+      <div class="plan-features">
+        <div class="feature-item">
+          <i class="bi bi-check-circle-fill feature-icon"></i>
+          <span>Unlimited website scans</span>
+        </div>
+        <div class="feature-item">
+          <i class="bi bi-check-circle-fill feature-icon"></i>
+          <span>Advanced privacy and SEO insights</span>
+        </div>
+        <div class="feature-item">
+          <i class="bi bi-check-circle-fill feature-icon"></i>
+          <span>Detailed reporting and CSV exports</span>
+        </div>
+        <div class="feature-item">
+          <i class="bi bi-check-circle-fill feature-icon"></i>
+          <span>One-time payment, lifetime access</span>
+        </div>
+        <div class="feature-item">
+          <i class="bi bi-check-circle-fill feature-icon"></i>
+          <span>Use on unlimited websites</span>
+        </div>
+      </div>
+      
+      <div class="payment-methods">
+        <div class="payment-method-tabs">
+          <div class="payment-tab active">Credit Card</div>
+          <div class="payment-tab">PayPal</div>
+        </div>
+        
+        <!-- Credit Card Form -->
+        <div id="card-payment" class="payment-form">
+          <div id="card-element">
+            <!-- Stripe Card Element will be inserted here -->
+          </div>
+          <button id="payment-button">
+            <span id="button-text">Pay $50 USD</span>
+            <div id="spinner" class="spinner" style="display: none;"></div>
+          </button>
+          <div id="payment-message" class="error-message"></div>
+        </div>
+        
+        <!-- PayPal Option (Hidden initially) -->
+        <div id="paypal-payment" class="payment-form" style="display: none;">
+          <div style="text-align: center; padding: 20px; background-color: #f8fafc; border-radius: 8px;">
+            <button id="paypal-button" style="background-color: #0070ba; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: 500; cursor: pointer;">
+              <i class="bi bi-paypal" style="margin-right: 8px;"></i>
+              Pay with PayPal
+            </button>
+          </div>
+          <div style="margin-top: 20px; text-align: center; color: #6b7280; font-size: 14px;">
+            You'll be redirected to PayPal to complete your payment.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <div>Secure payment processing through Stripe</div>
+      <div style="margin-top: 8px;">Visibility Insights © 2025 | Privacy Policy | Terms of Service</div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get session ID and return URL from query parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get('session') || 'default-session';
+      const returnUrl = urlParams.get('return_url') || '';
+      
+      // Save them to use after payment
+      localStorage.setItem('vi_session_id', sessionId);
+      localStorage.setItem('vi_return_url', returnUrl);
+      
+      // For demonstration, we'll simulate a payment process
+      // In a real implementation, you'd integrate with Stripe or PayPal here
+      
+      // Set up payment tabs
+      const tabs = document.querySelectorAll('.payment-tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Remove active class from all tabs
+          tabs.forEach(t => t.classList.remove('active'));
+          
+          // Add active class to clicked tab
+          this.classList.add('active');
+          
+          // Show corresponding payment form
+          if (this.textContent.includes('Credit Card')) {
+            document.getElementById('card-payment').style.display = 'block';
+            document.getElementById('paypal-payment').style.display = 'none';
+          } else if (this.textContent.includes('PayPal')) {
+            document.getElementById('card-payment').style.display = 'none';
+            document.getElementById('paypal-payment').style.display = 'block';
+          }
+        });
+      });
+      
+      // Handle credit card payment
+      const paymentButton = document.getElementById('payment-button');
+      if (paymentButton) {
+        paymentButton.addEventListener('click', function() {
+          // Show

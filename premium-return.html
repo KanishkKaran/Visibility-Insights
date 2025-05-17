@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Visibility Insights | Premium Activated</title>
+  <link href="premium-styles.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4166f5;
+      --secondary-color: #1a202c;
+      --light-bg: #f8fafc;
+      --border-color: #e2e8f0;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--light-bg);
+      color: #334155;
+      min-width: 340px;
+      min-height: 100vh;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .success-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.03);
+      padding: 40px;
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      margin: 0 auto;
+    }
+    
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background-color: #ecfdf5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    
+    .success-icon i {
+      font-size: 40px;
+      color: #10b981;
+    }
+    
+    .success-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 12px;
+    }
+    
+    .success-message {
+      color: #4b5563;
+      margin-bottom: 24px;
+      font-size: 16px;
+    }
+    
+    .premium-features {
+      margin: 24px 0;
+      text-align: left;
+    }
+    
+    .premium-feature-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      color: #4b5563;
+    }
+    
+    .premium-feature-item i {
+      color: #059669;
+      margin-right: 12px;
+    }
+    
+    .return-btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .return-btn:hover {
+      background-color: #3451c6;
+      color: white;
+    }
+
+    .error-container {
+      display: none;
+      margin-top: 20px;
+      color: #dc2626;
+      background-color: #fee2e2;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      padding: 12px;
+      text-align: center;
+    }
+    
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(65, 102, 245, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary-color);
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+    }
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .verification-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    
+    .contact-support {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+    
+    .contact-support a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    .contact-support a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="success-card">
+    <div class="success-icon">
+      <i class="bi bi-check-lg"></i>
+    </div>
+    <h1 class="success-title">Premium Activated!</h1>
+    
+    <div class="verification-status" id="verification-status">
+      <div class="loading-spinner"></div>
+      <span>Verifying your payment...</span>
+    </div>
+    
+    <p class="success-message">
+      Thank you for your payment. Your Visibility Insights Premium access has been activated successfully.
+    </p>
+    
+    <div class="premium-features">
+      <div class="premium-feature-item">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>Unlimited website scans</span>
+      </div>
+      <div class="premium-feature-item">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>Advanced insights and reporting</span>
+      </div>
+      <div class="premium-feature-item">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>One-time payment, lifetime access</span>
+      </div>
+    </div>
+    
+    <a href="popup.html" class="return-btn">
+      <i class="bi bi-lightning-charge-fill"></i>
+      Continue to Extension
+    </a>
+
+    <div class="error-container" id="error-message">
+      <p>There was an error verifying your payment. Please contact support at support@visibility-insights.com</p>
+    </div>
+    
+    <div class="contact-support">
+      Need help? <a href="mailto:support@visibility-insights.com">Contact Support</a>
+    </div>
+  </div>
+  
+  <script src="premium.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check the URL parameters for payment status
+      const urlParams = new URLSearchParams(window.location.search);
+      const paymentStatus = urlParams.get('payment_status');
+      const sessionId = urlParams.get('session');
+      
+      const verificationStatus = document.getElementById('verification-status');
+      const successMessage = document.querySelector('.success-message');
+      const successTitle = document.querySelector('.success-title');
+      const successIcon = document.querySelector('.success-icon i');
+      const errorMessage = document.getElementById('error-message');
+      
+      // Hide the success message initially
+      successMessage.style.display = 'none';
+      
+      if (paymentStatus === 'completed' && sessionId) {
+        // Verify the payment with the server before activating
+        chrome.runtime.sendMessage({ 
+          action: 'verifyPayment', 
+          sessionId: sessionId 
+        }, response => {
+          // Hide verification status
+          verificationStatus.style.display = 'none';
+          
+          if (response && response.success) {
+            // Payment verified, show success
+            successMessage.style.display = 'block';
+            successMessage.textContent = 
+              'Thank you for your payment. Your Visibility Insights Premium access has been activated successfully.';
+            
+            // Activate premium
+            if (window.premiumFeatures) {
+              window.premiumFeatures.activatePremium();
+              
+              // Log activation event
+              console.log('Premium activated successfully');
+              
+              // Update session storage to indicate activation
+              sessionStorage.setItem('premium_activated', 'true');
+              
+              // Set a flag in localStorage for persistence
+              localStorage.setItem('premium_activated_date', new Date().toISOString());
+            }
+          } else {
+            // Show error message
+            errorMessage.style.display = 'block';
+            successTitle.textContent = 'Verification Error';
+            successIcon.className = 'bi bi-exclamation-triangle';
+            document.querySelector('.success-icon').style.backgroundColor = '#fee2e2';
+            successIcon.style.color = '#dc2626';
+            
+            // Show a helpful message
+            successMessage.style.display = 'block';
+            successMessage.textContent = 'We encountered an issue while verifying your payment. Please contact our support team for assistance.';
+            
+            // Log the error
+            console.error('Payment verification failed');
+          }
+        });
+      } else if (paymentStatus === 'cancelled') {
+        // Hide verification status
+        verificationStatus.style.display = 'none';
+        
+        // Show cancelled message
+        successTitle.textContent = 'Payment Cancelled';
+        successMessage.style.display = 'block';
+        successMessage.textContent = 
+          'Your payment was cancelled. You can try again when you\'re ready.';
+        successIcon.className = 'bi bi-x-lg';
+        document.querySelector('.success-icon').style.backgroundColor = '#fee2e2';
+        successIcon.style.color = '#dc2626';
+        
+        // Update return button
+        document.querySelector('.return-btn').textContent = 'Return to Extension';
+      } else {
+        // No payment status or unexpected status
+        verificationStatus.style.display = 'none';
+        
+        // Check if premium is already active
+        chrome.storage.sync.get(['visibility_insights_premium'], (result) => {
+          if (result.visibility_insights_premium === true) {
+            // Already premium, show success
+            successTitle.textContent = 'Premium Already Active';
+            successMessage.style.display = 'block';
+            successMessage.textContent = 
+              'You already have premium access to Visibility Insights. Enjoy all the premium features!';
+          } else {
+            // No payment info and not premium, show error
+            successTitle.textContent = 'No Payment Information';
+            successMessage.style.display = 'block';
+            successMessage.textContent = 
+              'No payment information was received. Please try upgrading again from the extension.';
+            successIcon.className = 'bi bi-question-circle';
+            document.querySelector('.success-icon').style.backgroundColor = '#e0f2fe';
+            successIcon.style.color = '#0369a1';
+          }
+        });
+      }
+      
+      // Handle return button click
+      document.querySelector('.return-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Close tab and open popup
+        chrome.runtime.sendMessage({ action: 'openPopup' });
+        window.close();
+      });
+    });
+  </script>
+</body>
+</html>

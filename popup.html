@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Visibility Insights</title>
+  <link href="premium-styles.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4166f5;
+      --secondary-color: #1a202c;
+      --light-bg: #f8fafc;
+      --border-color: #e2e8f0;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--light-bg);
+      color: #334155;
+      min-width: 340px;
+      min-height: 330px;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .header {
+      background-color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .logo-icon {
+      color: var(--primary-color);
+      font-size: 24px;
+      margin-right: 12px;
+    }
+    
+    .logo-text {
+      font-weight: 600;
+      color: var(--secondary-color);
+      font-size: 20px;
+      margin: 0;
+    }
+    
+    .content {
+      padding: 20px;
+    }
+    
+    .description {
+      color: #64748b;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .feature-item {
+      background-color: white;
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #4b5563;
+      font-size: 15px;
+    }
+    
+    .feature-icon {
+      color: var(--primary-color);
+      font-size: 18px;
+    }
+    
+    .scan-btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 16px;
+      width: 100%;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 48px;
+    }
+    
+    .scan-btn:hover {
+      background-color: #3451c6;
+    }
+    
+    .scan-btn:disabled {
+      background-color: #93c5fd;
+      cursor: not-allowed;
+    }
+    
+    .footer {
+      padding: 12px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 12px;
+      border-top: 1px solid #e5e7eb;
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* Direct activation for development */
+    .direct-activate {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    
+    .direct-activate button {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0;
+      font-size: 12px;
+    }
+    
+    /* Responsive grid for feature items */
+    @media (max-width: 300px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <i class="bi bi-bar-chart-fill logo-icon"></i>
+    <h1 class="logo-text">Visibility Insights</h1>
+    <span class="premium-badge" style="display: none;">
+      <i class="bi bi-star-fill"></i>
+      Premium
+    </span>
+  </div>
+  
+  <div class="content">
+    <p class="description">
+      Scan your site for SEO visibility and privacy elements:
+    </p>
+    
+    <div class="feature-grid">
+      <div class="feature-item">
+        <i class="bi bi-robot feature-icon"></i>
+        <span>robots.txt</span>
+      </div>
+      <div class="feature-item">
+        <i class="bi bi-diagram-3 feature-icon"></i>
+        <span>sitemap.xml</span>
+      </div>
+      <div class="feature-item">
+        <i class="bi bi-code-slash feature-icon"></i>
+        <span>HTML comments</span>
+      </div>
+      <div class="feature-item">
+        <i class="bi bi-card-list feature-icon"></i>
+        <span>Cookies</span>
+      </div>
+      <div class="feature-item" style="grid-column: span 2;">
+        <i class="bi bi-box-arrow-up-right feature-icon"></i>
+        <span>External domains</span>
+      </div>
+    </div>
+    
+    <button id="run" class="scan-btn">
+      <i class="bi bi-lightning-charge-fill"></i>
+      Run Site Scan
+    </button>
+    
+    <div class="scan-limit-message"></div>
+    
+    <!-- For development purposes only -->
+    <div class="direct-activate">
+      <button id="dev-activate">Activate Premium (Development Only)</button>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <span>Visibility Insights © 2025</span>
+    <button class="premium-btn">
+      <i class="bi bi-star-fill"></i>
+      Upgrade to Premium
+    </button>
+  </div>
+  
+  <!-- Premium Overlay (shown after free scans are used) -->
+  <div id="premium-overlay">
+    <div class="premium-card">
+      <i class="bi bi-star-fill premium-icon"></i>
+      <h2 class="premium-title">Upgrade to Premium</h2>
+      <p class="premium-description">
+        You've used all your free scans. Upgrade to premium for unlimited access.
+      </p>
+      
+      <div class="premium-features">
+        <div class="premium-feature-item">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Unlimited website scans</span>
+        </div>
+        <div class="premium-feature-item">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Advanced insights and reporting</span>
+        </div>
+        <div class="premium-feature-item">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>One-time payment, lifetime access</span>
+        </div>
+      </div>
+      
+      <button class="premium-btn" style="width: 100%; margin-top: 20px;">
+        <i class="bi bi-star-fill"></i>
+        Upgrade Now - $50 USD
+      </button>
+      
+      <div class="payment-note" style="margin-top: 10px; font-size: 12px; color: #64748b;">
+        Secure payment processed via our website
+      </div>
+    </div>
+  </div>
+  
+  <script src="premium.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
