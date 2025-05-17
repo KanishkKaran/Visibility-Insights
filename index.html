@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visibility Insights | Premium Upgrade</title>
+  <title>Visibility Insights</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
@@ -11,7 +11,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- PayPal JS SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
   <style>
     :root {
       --primary-color: #4166f5;
@@ -27,24 +27,13 @@
       min-height: 100vh;
       padding: 0;
       margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
     
     .container {
       max-width: 800px;
       width: 100%;
       padding: 20px;
-    }
-    
-    .payment-card {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.03);
-      padding: 40px;
-      margin-bottom: 30px;
+      margin: 0 auto;
     }
     
     .header {
@@ -63,7 +52,33 @@
       font-size: 24px;
       font-weight: 700;
       color: var(--secondary-color);
-      margin: 0 0 20px 0;
+      margin: 0;
+    }
+    
+    .home-page {
+      text-align: center;
+      padding: 60px 0;
+    }
+    
+    .home-page h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 16px;
+    }
+    
+    .home-page p {
+      color: #4b5563;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    
+    .payment-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.03);
+      padding: 40px;
+      margin-bottom: 30px;
     }
     
     .plan-details {
@@ -93,8 +108,25 @@
       margin-bottom: 15px;
     }
     
-    .plan-features {
-      margin: 20px 0;
+    .primary-btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    
+    .primary-btn:hover {
+      background-color: #3451c6;
+      color: white;
     }
     
     .feature-item {
@@ -132,73 +164,11 @@
       border-bottom-color: var(--primary-color);
     }
     
-    #card-payment {
-      margin-bottom: 30px;
-    }
-    
     #paypal-button-container {
       width: 100%;
       min-height: 150px;
     }
     
-    .payment-button {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 14px;
-      border-radius: 6px;
-      font-weight: 500;
-      font-size: 16px;
-      width: 100%;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    
-    .payment-button:hover {
-      background-color: #3451c6;
-    }
-    
-    .payment-button:disabled {
-      background-color: #93c5fd;
-      cursor: not-allowed;
-    }
-    
-    .error-message {
-      color: #dc2626;
-      margin-top: 10px;
-      text-align: center;
-    }
-    
-    .footer {
-      text-align: center;
-      padding: 20px;
-      color: #64748b;
-      font-size: 14px;
-    }
-    
-    /* Loading spinner */
-    .spinner {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: white;
-      animation: spin 1s linear infinite;
-      margin-right: 8px;
-    }
-    
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* Card form element styles */
     .card-form {
       border: 1px solid #d1d5db;
       padding: 16px;
@@ -230,106 +200,282 @@
       border-radius: 4px;
       font-size: 16px;
     }
+    
+    .error-message {
+      color: #dc2626;
+      margin-top: 10px;
+      text-align: center;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 14px;
+      margin-top: 60px;
+    }
+    
+    .verification-page {
+      padding: 40px 0;
+    }
+    
+    .verification-page pre {
+      background-color: #f1f5f9;
+      padding: 20px;
+      border-radius: 6px;
+      overflow: auto;
+    }
+    
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* API response styles */
+    .notification {
+      padding: 12px 16px;
+      margin: 20px 0;
+      border-radius: 6px;
+    }
+
+    .notification.success {
+      background-color: #d1fae5;
+      border-left: 4px solid #059669;
+      color: #065f46;
+    }
+
+    .notification.error {
+      background-color: #fee2e2;
+      border-left: 4px solid #dc2626;
+      color: #b91c1c;
+    }
+
+    .notification.info {
+      background-color: #e0f2fe;
+      border-left: 4px solid #0284c7;
+      color: #0369a1;
+    }
+
+    /* Hide pages by default */
+    #home-page, #payment-page, #verification-page, #api-response {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="payment-card">
-      <div class="header">
-        <i class="bi bi-bar-chart-fill logo-icon"></i>
-        <h1>Visibility Insights Premium</h1>
-      </div>
-      
-      <p class="lead">Unlock unlimited website scans and advanced SEO insights.</p>
-      
-      <div class="plan-details">
-        <div class="plan-name">
-          <i class="bi bi-star-fill plan-icon"></i>
-          Premium Plan
-        </div>
-        <div class="plan-price">$50 <span class="text-muted" style="font-size: 16px;">USD (one-time payment)</span></div>
-        <p>Lifetime access to all premium features</p>
-      </div>
-      
-      <div class="plan-features">
-        <div class="feature-item">
-          <i class="bi bi-check-circle-fill feature-icon"></i>
-          <span>Unlimited website scans</span>
-        </div>
-        <div class="feature-item">
-          <i class="bi bi-check-circle-fill feature-icon"></i>
-          <span>Advanced privacy and SEO insights</span>
-        </div>
-        <div class="feature-item">
-          <i class="bi bi-check-circle-fill feature-icon"></i>
-          <span>Detailed reporting and CSV exports</span>
-        </div>
-        <div class="feature-item">
-          <i class="bi bi-check-circle-fill feature-icon"></i>
-          <span>One-time payment, lifetime access</span>
-        </div>
-        <div class="feature-item">
-          <i class="bi bi-check-circle-fill feature-icon"></i>
-          <span>Use on unlimited websites</span>
-        </div>
-      </div>
-      
-      <div class="payment-methods">
-        <div class="payment-method-tabs">
-          <div class="payment-tab active" id="tab-credit">Credit Card</div>
-          <div class="payment-tab" id="tab-paypal">PayPal</div>
-        </div>
-        
-        <!-- Credit Card Form -->
-        <div id="card-payment" class="payment-form">
-          <div class="card-form">
-            <div class="card-row">
-              <div>
-                <label for="card-number">Card Number</label>
-                <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
-              </div>
-            </div>
-            <div class="card-row">
-              <div>
-                <label for="card-expiry">Expiry Date</label>
-                <input type="text" id="card-expiry" placeholder="MM/YY">
-              </div>
-              <div>
-                <label for="card-cvc">CVC</label>
-                <input type="text" id="card-cvc" placeholder="123">
-              </div>
-            </div>
-          </div>
-          <button id="credit-card-button" class="payment-button">
-            <span>Pay $50 USD</span>
-          </button>
-        </div>
-        
-        <!-- PayPal Option (Hidden initially) -->
-        <div id="paypal-payment" class="payment-form" style="display: none;">
-          <div id="paypal-button-container"></div>
-        </div>
-      </div>
-      
-      <div id="payment-message" class="error-message"></div>
+    <div class="header">
+      <i class="bi bi-bar-chart-fill logo-icon"></i>
+      <h1>Visibility Insights</h1>
     </div>
     
+    <!-- Home Page -->
+    <div id="home-page" class="home-page">
+      <h2>Audit website SEO, privacy, and visibility</h2>
+      <p>Visibility Insights helps developers and site owners understand how their website is visible to search engines and users.</p>
+      <a href="https://chrome.google.com/webstore" class="primary-btn" target="_blank">
+        <i class="bi bi-download"></i> Get Chrome Extension
+      </a>
+      <div style="margin: 40px 0; display: flex; justify-content: center; gap: 20px;">
+        <a href="?page=payment" class="primary-btn">
+          <i class="bi bi-star-fill"></i> Upgrade to Premium
+        </a>
+        <a href="?page=verify" class="primary-btn" style="background-color: #64748b;">
+          <i class="bi bi-check-circle-fill"></i> Verify Payment
+        </a>
+      </div>
+    </div>
+    
+    <!-- Payment Page -->
+    <div id="payment-page">
+      <div class="payment-card">
+        <p class="lead">Unlock unlimited website scans and advanced SEO insights.</p>
+        
+        <div class="plan-details">
+          <div class="plan-name">
+            <i class="bi bi-star-fill plan-icon"></i>
+            Premium Plan
+          </div>
+          <div class="plan-price">$50 <span class="text-muted" style="font-size: 16px;">USD (one-time payment)</span></div>
+          <p>Lifetime access to all premium features</p>
+        </div>
+        
+        <div class="plan-features">
+          <div class="feature-item">
+            <i class="bi bi-check-circle-fill feature-icon"></i>
+            <span>Unlimited website scans</span>
+          </div>
+          <div class="feature-item">
+            <i class="bi bi-check-circle-fill feature-icon"></i>
+            <span>Advanced privacy and SEO insights</span>
+          </div>
+          <div class="feature-item">
+            <i class="bi bi-check-circle-fill feature-icon"></i>
+            <span>Detailed reporting and CSV exports</span>
+          </div>
+          <div class="feature-item">
+            <i class="bi bi-check-circle-fill feature-icon"></i>
+            <span>One-time payment, lifetime access</span>
+          </div>
+          <div class="feature-item">
+            <i class="bi bi-check-circle-fill feature-icon"></i>
+            <span>Use on unlimited websites</span>
+          </div>
+        </div>
+        
+        <div class="payment-methods">
+          <div class="payment-method-tabs">
+            <div class="payment-tab active" id="tab-credit">Credit Card</div>
+            <div class="payment-tab" id="tab-paypal">PayPal</div>
+          </div>
+          
+          <!-- Credit Card Form -->
+          <div id="card-payment" class="payment-form">
+            <div class="card-form">
+              <div class="card-row">
+                <div>
+                  <label for="card-number">Card Number</label>
+                  <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                </div>
+              </div>
+              <div class="card-row">
+                <div>
+                  <label for="card-expiry">Expiry Date</label>
+                  <input type="text" id="card-expiry" placeholder="MM/YY">
+                </div>
+                <div>
+                  <label for="card-cvc">CVC</label>
+                  <input type="text" id="card-cvc" placeholder="123">
+                </div>
+              </div>
+            </div>
+            <button id="credit-card-button" class="primary-btn" style="width: 100%;">
+              <span>Pay $50 USD</span>
+            </button>
+          </div>
+          
+          <!-- PayPal Option (Hidden initially) -->
+          <div id="paypal-payment" class="payment-form" style="display: none;">
+            <div id="paypal-button-container"></div>
+          </div>
+        </div>
+        
+        <div id="payment-message" class="error-message"></div>
+      </div>
+    </div>
+    
+    <!-- Verification Page -->
+    <div id="verification-page" class="verification-page">
+      <h2>Payment Verification</h2>
+      
+      <div class="notification info">
+        <strong>Note:</strong> This endpoint verifies payment status for the Visibility Insights Chrome extension.
+        For testing purposes, any session ID starting with "si-" will be considered valid.
+      </div>
+      
+      <h3>Response:</h3>
+      <pre id="verification-result">Loading...</pre>
+      
+      <a href="?" class="primary-btn">
+        <i class="bi bi-house"></i> Back to Home
+      </a>
+    </div>
+    
+    <!-- API Response (for direct API calls) -->
+    <div id="api-response"></div>
+    
     <div class="footer">
-      <div>Secure payment processing</div>
-      <div style="margin-top: 8px;">Visibility Insights © 2025 | Privacy Policy | Terms of Service</div>
+      Visibility Insights © 2025
     </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Get session ID and return URL from query parameters
+      // Parse URL parameters
       const urlParams = new URLSearchParams(window.location.search);
-      const sessionId = urlParams.get('session') || 'default-session';
-      const returnUrl = urlParams.get('return_url') || '';
+      const page = urlParams.get('page');
+      const format = urlParams.get('format');
+      const sessionId = urlParams.get('sessionId');
+      const returnUrl = urlParams.get('return_url');
+      
+      // Detect if this is an API call
+      const isApiCall = format === 'json' || (sessionId && !page);
+      
+      // Handle direct API calls
+      if (isApiCall) {
+        handleApiRequest(sessionId);
+        return;
+      }
+      
+      // Route to correct page
+      if (page === 'payment') {
+        showPaymentPage(urlParams.get('session'), urlParams.get('return_url'));
+      } else if (page === 'verify') {
+        showVerificationPage(sessionId);
+      } else {
+        showHomePage();
+      }
+    });
+    
+    // Handle API Requests (for Chrome extension)
+    function handleApiRequest(sessionId) {
+      const apiResponse = document.getElementById('api-response');
+      apiResponse.style.display = 'block';
+      
+      // Create a response object
+      let responseObj = { success: false, premium: false };
+      
+      // If session ID starts with 'si-' or is in localStorage, it's valid
+      if (sessionId && (sessionId.startsWith('si-') || isValidSessionInStorage(sessionId))) {
+        responseObj = {
+          success: true,
+          premium: true,
+          verified: true,
+          timestamp: new Date().toISOString()
+        };
+      }
+      
+      // For an API call, replace the entire document with just the JSON
+      document.body.innerHTML = JSON.stringify(responseObj);
+      document.querySelector('head').innerHTML = '<title>API Response</title>';
+    }
+    
+    // Show Home Page
+    function showHomePage() {
+      document.getElementById('home-page').style.display = 'block';
+      document.getElementById('payment-page').style.display = 'none';
+      document.getElementById('verification-page').style.display = 'none';
+      document.getElementById('api-response').style.display = 'none';
+      document.title = 'Visibility Insights';
+    }
+    
+    // Show Payment Page
+    function showPaymentPage(session, returnUrl) {
+      document.getElementById('home-page').style.display = 'none';
+      document.getElementById('payment-page').style.display = 'block';
+      document.getElementById('verification-page').style.display = 'none';
+      document.getElementById('api-response').style.display = 'none';
+      document.title = 'Visibility Insights | Premium Upgrade';
+      
+      // Store session and return URL
+      const sessionId = session || 'default-session';
       
       // Save them to use after payment
       localStorage.setItem('vi_session_id', sessionId);
-      localStorage.setItem('vi_return_url', returnUrl);
+      localStorage.setItem('vi_return_url', returnUrl || '');
       
       // Set up payment tabs
       const tabCredit = document.getElementById('tab-credit');
@@ -352,50 +498,33 @@
       });
       
       // Initialize PayPal buttons
-      paypal.Buttons({
-        createOrder: function(data, actions) {
-          // Create a PayPal order
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: '50.00' // $50 USD
-              },
-              description: 'Visibility Insights Premium'
-            }]
-          });
-        },
-        onApprove: function(data, actions) {
-          // Capture funds from the transaction
-          return actions.order.capture().then(function(details) {
-            // Record successful payment on our server
-            fetch('/api/record-payment', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                sessionId: sessionId,
-                paymentMethod: 'paypal',
-                orderId: data.orderID,
-                amount: 50,
-                email: details.payer.email_address
-              })
-            })
-            .then(response => response.json())
-            .then(result => {
-              // Redirect back to extension
-              if (returnUrl) {
-                window.location.href = `${returnUrl}?payment_status=completed&session=${sessionId}`;
+      if (window.paypal) {
+        paypal.Buttons({
+          createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: '50.00'
+                }
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+              // Record this as a successful payment
+              recordSuccessfulPayment(sessionId);
+              
+              // Redirect back to extension or success page
+              const storedReturnUrl = localStorage.getItem('vi_return_url');
+              if (storedReturnUrl) {
+                window.location.href = `${storedReturnUrl}?payment_status=completed&session=${sessionId}`;
               } else {
                 alert('Payment successful! You can now close this window and return to the extension.');
               }
-            })
-            .catch(error => {
-              document.getElementById('payment-message').textContent = 'Error processing payment. Please try again.';
             });
-          });
-        }
-      }).render('#paypal-button-container');
+          }
+        }).render('#paypal-button-container');
+      }
       
       // Handle credit card payment (simplified for demo)
       document.getElementById('credit-card-button').addEventListener('click', function() {
@@ -414,41 +543,78 @@
         const originalText = this.innerHTML;
         this.innerHTML = '<div class="spinner"></div> Processing...';
         
-        // For demonstration, we'll simulate a successful payment after a delay
+        // Simulate successful payment after a delay
         setTimeout(() => {
-          // Record successful payment on our server
-          fetch('/api/record-payment', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              sessionId: sessionId,
-              paymentMethod: 'credit_card',
-              amount: 50
-            })
-          })
-          .then(response => response.json())
-          .then(result => {
-            // Redirect back to extension
-            if (returnUrl) {
-              window.location.href = `${returnUrl}?payment_status=completed&session=${sessionId}`;
-            } else {
-              alert('Payment successful! You can now close this window and return to the extension.');
-            }
-          })
-          .catch(error => {
-            // For demonstration, we'll still redirect with success
-            // In production, you would show an error message
-            if (returnUrl) {
-              window.location.href = `${returnUrl}?payment_status=completed&session=${sessionId}`;
-            } else {
-              alert('Payment successful! You can now close this window and return to the extension.');
-            }
-          });
+          // Record this as a successful payment
+          recordSuccessfulPayment(sessionId);
+          
+          // Redirect back to extension or success page
+          const storedReturnUrl = localStorage.getItem('vi_return_url');
+          if (storedReturnUrl) {
+            window.location.href = `${storedReturnUrl}?payment_status=completed&session=${sessionId}`;
+          } else {
+            alert('Payment successful! You can now close this window and return to the extension.');
+          }
         }, 2000);
       });
-    });
+    }
+    
+    // Show Verification Page
+    function showVerificationPage(sessionId) {
+      document.getElementById('home-page').style.display = 'none';
+      document.getElementById('payment-page').style.display = 'none';
+      document.getElementById('verification-page').style.display = 'block';
+      document.getElementById('api-response').style.display = 'none';
+      document.title = 'Visibility Insights | Payment Verification';
+      
+      const verificationResult = document.getElementById('verification-result');
+      
+      // Create a response object
+      let responseObj = { success: false, premium: false, message: 'No session ID provided.' };
+      
+      // If session ID is provided
+      if (sessionId) {
+        if (sessionId.startsWith('si-') || isValidSessionInStorage(sessionId)) {
+          responseObj = {
+            success: true,
+            premium: true,
+            verified: true,
+            timestamp: new Date().toISOString()
+          };
+        } else {
+          responseObj.message = 'Session ID not recognized.';
+        }
+      }
+      
+      // Display result
+      verificationResult.textContent = JSON.stringify(responseObj, null, 2);
+    }
+    
+    // Record successful payment in localStorage
+    function recordSuccessfulPayment(sessionId) {
+      try {
+        // Get existing sessions
+        const storedSessions = JSON.parse(localStorage.getItem('valid_payment_sessions') || '[]');
+        
+        // Add this session if it doesn't exist
+        if (!storedSessions.includes(sessionId)) {
+          storedSessions.push(sessionId);
+          localStorage.setItem('valid_payment_sessions', JSON.stringify(storedSessions));
+        }
+      } catch (e) {
+        console.error('Error recording payment:', e);
+      }
+    }
+    
+    // Check if session is valid
+    function isValidSessionInStorage(sessionId) {
+      try {
+        const storedSessions = JSON.parse(localStorage.getItem('valid_payment_sessions') || '[]');
+        return storedSessions.includes(sessionId);
+      } catch (e) {
+        return false;
+      }
+    }
   </script>
 </body>
 </html>

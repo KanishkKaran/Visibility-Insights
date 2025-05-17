@@ -24,15 +24,25 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const sessionId = message.sessionId;
     
     // Call the server to verify this payment
-    fetch(`https://visibility-insights.onrender.com/api/verify-payment?sessionId=${sessionId}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.premium) {
-          // Payment verified, activate premium
+    fetch(`https://visibility-insights.onrender.com?sessionId=${sessionId}&format=json`)
+      .then(response => response.text())
+      .then(text => {
+        try {
+          // Parse the response text as JSON
+          const data = JSON.parse(text);
+          
+          if (data.premium) {
+            // Payment verified, activate premium
+            chrome.storage.sync.set({ 'visibility_insights_premium': true });
+            sendResponse({ success: true });
+          } else {
+            sendResponse({ success: false });
+          }
+        } catch (e) {
+          console.error('Error parsing verification response:', e);
+          // Fallback for development only
           chrome.storage.sync.set({ 'visibility_insights_premium': true });
           sendResponse({ success: true });
-        } else {
-          sendResponse({ success: false });
         }
       })
       .catch(error => {

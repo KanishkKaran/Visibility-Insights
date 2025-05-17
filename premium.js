@@ -2,7 +2,7 @@
 const PREMIUM_KEY = 'visibility_insights_premium';
 const SCAN_COUNT_KEY = 'visibility_insights_scan_count';
 const MAX_FREE_SCANS = 3;
-const PAYMENT_SITE_URL = 'https://visibility-insights.onrender.com/payment';
+const PAYMENT_SITE_URL = 'https://visibility-insights.onrender.com?page=payment';
 
 // Check if user has premium access
 async function hasPremiumAccess() {
@@ -179,7 +179,7 @@ function redirectToPaymentSite() {
   
   // Open the payment site in a new tab with session ID and return URL
   chrome.tabs.create({ 
-    url: `${PAYMENT_SITE_URL}?session=${sessionId}&return_url=${encodeURIComponent(returnUrl)}` 
+    url: `${PAYMENT_SITE_URL}&session=${sessionId}&return_url=${encodeURIComponent(returnUrl)}` 
   });
   
   // Close the popup overlay if it's open
